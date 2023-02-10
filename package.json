@@ -1,6 +1,6 @@
 {
-  "name": "mock-utils",
-  "version": "0.0.16",
+  "name": "mock-manager",
+  "version": "0.1.0",
   "description": "mock utils, convenient config",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "mock",
     "utils"
   ],
-  "author": "kang.han",
+  "author": "baukh",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/heriky/mock-utils/issues"
