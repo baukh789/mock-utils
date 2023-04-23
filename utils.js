@@ -58,6 +58,8 @@ function register(data, app, prefix = '', headers) {
                 for(let key in headers) {
                     res.setHeader(key, headers[key]);
                 }
+                res.setHeader('Access-Control-Allow-Credentials', true);
+                res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
                 res.send(resData);
             });
             return;
@@ -70,6 +72,8 @@ function register(data, app, prefix = '', headers) {
                     for(let key in headers) {
                         res.setHeader(key, headers[key]);
                     }
+                    res.setHeader('Access-Control-Allow-Credentials', true);
+                    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
                     _data && res.send(_data);
                 });
             });
@@ -80,6 +84,8 @@ function register(data, app, prefix = '', headers) {
             for(let key in headers) {
                 res.setHeader(key, headers[key]);
             }
+            res.setHeader('Access-Control-Allow-Credentials', true);
+            res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
             typeof value === 'function' ? value(req, res, next) : res.send(value)
         })
     });
