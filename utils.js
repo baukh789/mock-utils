@@ -55,11 +55,13 @@ function register(data, app, prefix = '', headers) {
             const { url: _url, method, response } = value;
             app[method](_url, (req, res) => {
                 const resData = typeof response === 'function' ? response(req, res) : response;
+                if (req.headers.origin) {
+                    res.setHeader('Access-Control-Allow-Credentials', true);
+                    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+                }
                 for(let key in headers) {
                     res.setHeader(key, headers[key]);
                 }
-                res.setHeader('Access-Control-Allow-Credentials', true);
-                res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
                 res.send(resData);
             });
             return;
@@ -69,11 +71,13 @@ function register(data, app, prefix = '', headers) {
             Object.entries(value).forEach(([method, rawData]) => {
                 app[method](url, (req, res, next) => {
                     const _data = typeof rawData === 'function' ? rawData(req, res, next) : rawData;
+                    if (req.headers.origin) {
+                        res.setHeader('Access-Control-Allow-Credentials', true);
+                        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+                    }
                     for(let key in headers) {
                         res.setHeader(key, headers[key]);
                     }
-                    res.setHeader('Access-Control-Allow-Credentials', true);
-                    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
                     _data && res.send(_data);
                 });
             });
@@ -81,11 +85,13 @@ function register(data, app, prefix = '', headers) {
         }
 
         app.get(url, (req, res, next) => {
+            if (req.headers.origin) {
+                res.setHeader('Access-Control-Allow-Credentials', true);
+                res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+            }
             for(let key in headers) {
                 res.setHeader(key, headers[key]);
             }
-            res.setHeader('Access-Control-Allow-Credentials', true);
-            res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
             typeof value === 'function' ? value(req, res, next) : res.send(value)
         })
     });

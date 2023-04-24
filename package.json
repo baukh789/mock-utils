@@ -1,6 +1,6 @@
 {
   "name": "mock-manager",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "mock utils, convenient config",
   "main": "index.js",
   "scripts": {
